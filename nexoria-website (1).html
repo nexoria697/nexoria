@@ -2,658 +2,48 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXORIA Smart Security | Deprem Güvenlik Sistemleri</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEXORIA SMART SECURITY | TEKNOFEST 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00f0ff;
-            --secondary: #ff006e;
-            --dark: #0a0e27;
-            --darker: #050817;
-            --light: #ffffff;
-            --gray: #8892b0;
-            --accent: #ffd60a;
-        }
-
-        body {
-            font-family: 'Instrument Sans', sans-serif;
-            background: var(--darker);
-            color: var(--light);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 214, 10, 0.05) 0%, transparent 50%);
-            animation: bgPulse 15s ease-in-out infinite;
-        }
-
-        @keyframes bgPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 5%;
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
-            z-index: 1000;
-            animation: slideDown 0.8s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--gray);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 5% 4rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.6rem 1.5rem;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 50px;
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease 0.4s both;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            color: var(--gray);
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            animation: fadeInUp 1s ease 0.6s both;
-            line-height: 1.8;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.8s both;
-        }
-
-        .btn {
-            padding: 1.2rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: var(--dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: rgba(255, 0, 110, 0.1);
-            border: 1px solid var(--secondary);
-            border-radius: 50px;
-            color: var(--secondary);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-description {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .about-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .about-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .about-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .about-card p {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.5s;
-            position: relative;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 0, 110, 0.1));
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-        }
-
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--primary);
-            box-shadow: 0 25px 50px rgba(0, 240, 255, 0.3);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            filter: grayscale(50%);
-            transition: all 0.5s;
-        }
-
-        .project-card:hover .project-image {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        .project-content {
-            padding: 2.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(255, 214, 10, 0.15);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .project-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .project-card p {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-features {
-            list-style: none;
-            margin-top: 1.5rem;
-        }
-
-        .project-features li {
-            padding: 0.6rem 0;
-            color: var(--gray);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .project-features li::before {
-            content: '▸';
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Goals Section */
-        .goals-container {
-            margin-top: 3rem;
-        }
-
-        .goal-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid var(--primary);
-            border-radius: 8px;
-            padding: 2rem 2.5rem;
-            margin-bottom: 2rem;
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .goal-item::before {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            transform: scaleY(0);
-            transition: transform 0.4s;
-        }
-
-        .goal-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .goal-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .goal-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary);
-            opacity: 0.3;
-            position: absolute;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .goal-item h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--light);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .goal-item p {
-            color: var(--gray);
-            line-height: 1.8;
-            padding-right: 5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 14, 39, 0.8);
-            border-top: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 3rem 5%;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .footer-tagline {
-            color: var(--gray);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-text {
-            color: var(--gray);
-            font-size: 0.9rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.85rem;
-            }
-
-            .hero {
-                padding: 6rem 5% 3rem;
-            }
-
-            section {
-                padding: 4rem 5%;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .goal-number {
-                font-size: 2rem;
-            }
-
-            .goal-item p {
-                padding-right: 3rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-        }
+        /* Ana Yapı */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow-x: hidden; background: #050817; scroll-behavior: smooth; }
+        :root { --primary: #00f0ff; --secondary: #ff006e; --light: #ffffff; --gray: #8892b0; --accent: #ffd60a; }
+        body { font-family: 'Instrument Sans', sans-serif; color: var(--light); line-height: 1.6; }
+        
+        /* Arka Plan Efektleri */
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%); }
+        .grid-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; }
+
+        /* Sabit Modern Menü */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 1.2rem 5%; background: rgba(10, 14, 39, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 240, 255, 0.2); z-index: 10000; }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { color: var(--light); text-decoration: none; font-size: 0.8rem; font-family: 'Orbitron'; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-tekno { border: 1px solid var(--primary); padding: 5px 12px; border-radius: 5px; color: var(--primary) !important; }
+
+        /* Bölüm Ayarları */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 4.5rem); text-transform: uppercase; margin-bottom: 1rem; }
+        .gradient-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        section { padding: 8rem 5% 4rem; max-width: 1200px; margin: 0 auto; }
+        h2 { font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 3rem; text-align: center; letter-spacing: 3px; color: var(--primary); }
+        
+        .card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 240, 255, 0.1); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; transition: 0.4s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(0, 240, 255, 0.05); }
+        
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s all ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .tech-list { list-style: none; margin-top: 1rem; }
+        .tech-list li { color: var(--gray); font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; }
+        .tech-list li::before { content: '▹'; color: var(--primary); margin-right: 10px; }
+
+        footer { text-align: center; padding: 4rem; border-top: 1px solid rgba(0, 240, 255, 0.1); color: var(--gray); font-family: 'Orbitron'; font-size: 0.7rem; }
     </style>
 </head>
 <body>
@@ -663,199 +53,72 @@
     <header>
         <nav>
             <div class="logo">NEXORIA</div>
-            <ul class="nav-links">
-                <li><a href="#hakkimizda">Hakkımızda</a></li>
-                <li><a href="#projeler">Projeler</a></li>
-                <li><a href="#hedefler">Hedefler</a></li>
-            </ul>
+            <div class="nav-links">
+                <a href="#vizyon">VİZYON</a>
+                <a href="#projeler">SİSTEMLER</a>
+                <a href="#teknofest" class="btn-tekno">TEKNOFEST</a>
+            </div>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">🚀 Deprem Güvenlik Teknolojileri</div>
-            <h1>
-                NEXORIA<br>
-                <span class="gradient-text">Smart Security</span>
-            </h1>
-            <p class="hero-subtitle">
-                Gelecek teknolojiye yön veren, insanların hayatını kolaylaştıran ve deprem güvenliğinde yenilikçi çözümler üreten bir güvenlik teknolojileri firması
-            </p>
-            <div class="cta-buttons">
-                <a href="#projeler" class="btn btn-primary">Projelerimiz</a>
-                <a href="#hedefler" class="btn btn-secondary">Hedeflerimiz</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="hakkimizda">
-        <div class="section-header fade-in">
-            <span class="section-tag">Biz Kimiz?</span>
-            <h2>Kuruluş <span class="gradient-text">Amacımız</span></h2>
-            <p class="section-description">
-                Nexoria Smart Security ailesi, çocukluktan beri teknoloji ve projelerle büyüyen bir tutkuyla kuruldu. Elektronik ve elektrik alanındaki derin ilgimiz, bugün küçük bir atölyeden başlayarak yarının fabrikasını inşa etme hayalimize dönüştü.
-            </p>
-        </div>
-
-        <div class="about-grid">
-            <div class="about-card fade-in">
-                <div class="card-icon">🎯</div>
-                <h3>Vizyonumuz</h3>
-                <p>Geleceğin teknolojisine yön veren, insanların hayatını kolaylaştıran ve deprem güvenliğinde çığır açan çözümler üretmek</p>
-            </div>
-
-            <div class="about-card fade-in">
-                <div class="card-icon">💡</div>
-                <h3>Misyonumuz</h3>
-                <p>Ekonomik ve ulaşılabilir maliyetlerle, en gelişmiş teknolojileri kullanarak hayat kurtaran sistemler geliştirmek</p>
-            </div>
-
-            <div class="about-card fade-in">
-                <div class="card-icon">🔬</div>
-                <h3>Yaklaşımımız</h3>
-                <p>Sürekli araştırma, geliştirme ve yenilikçi çözümlerle deprem güvenliği alanında öncü olmak</p>
-            </div>
-        </div>
+    <section class="hero" id="vizyon">
+        <div style="padding: 0.5rem 1.5rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary); border-radius: 50px; color: var(--primary); font-size: 0.7rem; margin-bottom: 1.5rem; font-family: 'Orbitron';">GEN-4 SECURITY</div>
+        <h1>NEXORIA <span class="gradient-text">SMART</span></h1>
+        <p style="color: var(--gray); max-width: 700px; font-size: 1.1rem;">Deprem anında ve sonrasında otonom sistemlerle hayat kurtarmak için tasarlanmış hibrit güvenlik ekosistemi.</p>
     </section>
 
     <section id="projeler">
-        <div class="section-header fade-in">
-            <span class="section-tag">İnovasyon</span>
-            <h2>Hayat Kurtaran <span class="gradient-text">Projelerimiz</span></h2>
-            <p class="section-description">
-                Deprem anında insan hayatını korumak için geliştirdiğimiz teknolojik çözümler
-            </p>
+        <h2>TEKNİK SİSTEMLERİMİZ</h2>
+        
+        <div class="card fade-in">
+            <h3 style="color: var(--primary); font-family: 'Orbitron';">GABS 1.0 (Göçük Altı Bulma Sistemi)</h3>
+            <p style="margin-top: 1rem;">Enkaz altındaki yaşam belirtilerini (nefes, kalp atışı, termal ısı) tespit eden ve konum verisini anlık olarak kurtarma merkezine ileten radar modülü.</p>
+            <ul class="tech-list">
+                <li><strong>Lidar ve Termal Tarama:</strong> Beton blokların arasından ısı ve hareket algılama.</li>
+                <li><strong>Konumlandırma:</strong> GPS ve hücresel veri ile milimetrik lokasyon paylaşımı.</li>
+                <li><strong>Dayanıklılık:</strong> 72 saat kesintisiz çalışma ve IP68 su/toz koruması.</li>
+            </ul>
         </div>
 
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800&h=400&fit=crop" alt="GABS 1.0" class="project-image">
-                <div class="project-content">
-                    <span class="project-tag">v1.0</span>
-                    <h3>GABS 1.0</h3>
-                    <p><strong>Göçük Altı Konumlandırma Sistemi</strong></p>
-                    <p>
-                        Deprem sonrası enkaz altında kalan bireylerin hızlı ve etkili bir şekilde tespit edilmesi için geliştirilmiş akıllı konum belirleme sistemi.
-                    </p>
-                    <ul class="project-features">
-                        <li>ESP32 WROOM tabanlı akıllı kontrol sistemi</li>
-                        <li>Mikrofon modülü ile ses algılama</li>
-                        <li>Titreşim sensörü ile hareket tespiti</li>
-                        <li>Koordinat bazlı konum belirleme</li>
-                        <li>Gerçek zamanlı veri iletimi</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop" alt="AKS 1.0" class="project-image">
-                <div class="project-content">
-                    <span class="project-tag">v1.0</span>
-                    <h3>AKS 1.0</h3>
-                    <p><strong>Akıllı Kapı Sistemi</strong></p>
-                    <p>
-                        Deprem anında kapıların sıkışmasını engelleyen ve güvenli tahliyeyi sağlayan otomatik acil durum kapı sistemi.
-                    </p>
-                    <ul class="project-features">
-                        <li>Hassas limit switch ile basınç algılama</li>
-                        <li>Sesli uyarı sistemi</li>
-                        <li>Lineer actuator ile otomatik açılma</li>
-                        <li>Acil durum protokolü aktivasyonu</li>
-                        <li>Mekanik hasar önleme mekanizması</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="card fade-in">
+            <h3 style="color: var(--secondary); font-family: 'Orbitron';">AKS 1.0 (Akıllı Kapı Sistemi)</h3>
+            <p style="margin-top: 1rem;">Yapay zeka destekli ivmeölçerler sayesinde deprem dalgasını (P dalgası) saniyeler öncesinden algılayarak kapı kasalarını serbest bırakan sistem.</p>
+            <ul class="tech-list">
+                <li><strong>Manyetik Kasalar:</strong> Sarsıntı anında fiziksel sıkışmayı engeller.</li>
+                <li><strong>Otonom Aydınlatma:</strong> Elektrik kesilse dahi yolu aydınlatan acil durum LED'leri.</li>
+                <li><strong>Entegrasyon:</strong> Binadaki diğer Nexoria üniteleriyle eş zamanlı çalışma.</li>
+            </ul>
         </div>
     </section>
 
-    <section id="hedefler">
-        <div class="section-header fade-in">
-            <span class="section-tag">Gelecek</span>
-            <h2>Stratejik <span class="gradient-text">Hedeflerimiz</span></h2>
-            <p class="section-description">
-                Vizyon ve misyonumuz doğrultusunda belirlediğimiz uzun vadeli hedeflerimiz
-            </p>
+    <section id="teknofest">
+        <h2 style="color: var(--secondary);">TEKNOFEST 2024 SÜRECİ</h2>
+        <div class="card fade-in" style="border-left: 5px solid var(--primary);">
+            <h4 style="font-family: 'Orbitron'; color: var(--primary);">1. ÖN TASARIM RAPORU (ÖTR)</h4>
+            <p>Proje fikrinin özgünlüğü, teknik uygulanabilirliği ve hedef kitlenin analizi üzerine kurulu temel rapor süreci başarıyla tamamlanmıştır.</p>
         </div>
-
-        <div class="goals-container">
-            <div class="goal-item fade-in">
-                <span class="goal-number">01</span>
-                <h3>Ürün Geliştirme ve İyileştirme</h3>
-                <p>
-                    GABS 1.0 ve AKS 1.0 sistemlerimizi sürekli geliştirerek daha verimli, daha güvenilir ve daha akıllı hale getirmek. Yapay zeka ve makine öğrenimi teknolojilerini entegre ederek sistemlerimizin tahmin ve önleme kabiliyetlerini artırmak.
-                </p>
-            </div>
-
-            <div class="goal-item fade-in">
-                <span class="goal-number">02</span>
-                <h3>Ekonomiye Katkı ve Üretim Kapasitesi</h3>
-                <p>
-                    Kendi çiftlik ekipmanlarımızın üretimini gerçekleştirerek yerel ekonomiye katkı sağlamak. Küçük atölyemizden başlayarak büyük ölçekli bir üretim tesisine ulaşmak ve istihdam yaratmak.
-                </p>
-            </div>
-
-            <div class="goal-item fade-in">
-                <span class="goal-number">03</span>
-                <h3>Teknolojik Liderlik</h3>
-                <p>
-                    Sadece bir firma olmaktan öte, geleceğe yön veren, insanların hayatını kolaylaştıran ve deprem güvenliği alanında küresel standartları belirleyen bir teknoloji lideri olmak.
-                </p>
-            </div>
+        <div class="card fade-in" style="border-left: 5px solid var(--secondary);">
+            <h4 style="font-family: 'Orbitron'; color: var(--secondary);">2. PROJE DETAY RAPORU (PDR)</h4>
+            <p>Mekanik tasarımın 3D modelleri, yazılım algoritmaları ve prototip üretim maliyet analizlerinin sunulduğu kapsamlı aşama.</p>
+        </div>
+        <div class="card fade-in" style="border-left: 5px solid var(--accent);">
+            <h4 style="font-family: 'Orbitron'; color: var(--accent);">3. KRİTİK TASARIM & FİNAL</h4>
+            <p>Saha testleri, hata ayıklama ve kullanıcı deneyimi optimizasyonları ile projenin büyük jüri önündeki final gösterimi.</p>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">NEXORIA</div>
-            <p class="footer-tagline">Geleceğe yön veren teknoloji, insana değer katan çözümler</p>
-            <p class="footer-text">
-                © 2026 NEXORIA Smart Security. Deprem güvenliğinde teknolojik çözümler üretiyoruz.
-            </p>
-        </div>
+        <p>NEXORIA SMART SECURITY SYSTEM &copy; 2024</p>
+        <p style="margin-top: 10px; font-size: 0.5rem; color: var(--primary);">FUTURE PROTECTED BY NEXORIA</p>
     </footer>
 
     <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Dynamic header background
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(10, 14, 39, 0.95)';
-            } else {
-                header.style.background = 'rgba(10, 14, 39, 0.8)';
-            }
-        });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
